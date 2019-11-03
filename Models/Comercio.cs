@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace preciosya
+namespace preciosya.Models
 {
     public partial class Comercio
     {

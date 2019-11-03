@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace preciosya
+namespace preciosya.Models
 {
     public partial class proyectosoftContext : DbContext
     {
