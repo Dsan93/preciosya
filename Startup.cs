@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using preciosya.Models;
 
 namespace preciosya
 {
@@ -31,6 +33,8 @@ namespace preciosya
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddMvc();
+            services.AddDbContext<proyectosoftContext>(options => options.UseSqlServer(Configuration.GetConnectionString("proyectosoftContext")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
