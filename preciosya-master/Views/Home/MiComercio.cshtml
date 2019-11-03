@@ -1,0 +1,337 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- bootstrap -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <!-- Leaflet javascript -->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="/wwwroot/css/estilos.css">
+
+    <script type="text/javascript" src="/wwwroot/js/functions.js"></script>
+
+
+
+
+    <style>
+            .formulario{
+                background: #DDD !important;
+            }
+            .boton_submit{
+                font-family: sans-serif;
+                padding: 10px, 10px, 10px, 10px;
+                border-radius: 5px; 
+            }
+            #pagina{
+                display: inline-block;
+                position: relative;
+                height: 100%;
+            }
+            #map{
+                cursor:pointer;
+            }
+
+
+
+            /* footer */
+
+            .fondoFooter{
+                background-color: black;
+            }
+        
+            .slider{
+                    height: 30vh;
+                    color:black;
+                    background-color:wheat;
+                    background-size: cover;
+                    background-position: center;
+                    font-family: "Roboto";
+                    font-size: 48px;
+                }
+  
+    
+          </style>
+
+            <script src="extensions/editable/bootstrap-table-editable.js"></script>
+            <script src="extensions/accent-neutralise/bootstrap-table-accent-neutralise.js"></script>
+
+</head>
+<body >
+
+
+
+<!-- #################################################################################################################################### -->
+<!-- ####################################################################### MAPA ##################################################### -->
+<!-- #################################################################################################################################### -->
+
+      
+
+
+    <div class="container py-5">
+        <div class="row w-100 h-100 m-0">
+        <div class="col-9 p-0">
+            <div id="map" class="h-100"></div>
+        </div>
+        <div class="col-3 p-0">
+            <form action="#" class="float-right py-4 px-5 formulario w-100 h-100 m-0" role="form" id="formulario">
+                <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input class="form-control" id="nombre" placeholder="ej:Av. E. Madero 1020" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input class="form-control" id="direccion" placeholder="ej:Av. E. Madero 1020" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input class="form-control" id="telefono" placeholder="ej: 54 9 11 5272 0900">
+                </div>
+                
+                <div class="form-group">
+                    <label for="categoria">Zona</label>
+                    <select class="form-control" id="categoria" required>
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option>Comercial</option>
+                    <option>Residencial</option>
+                    <option>Mixta</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="coord">Coord.</label>
+                    <input class="form-control" id="coord" placeholder="ej:-34.5966417, -58.374097" required>
+                </div>
+                
+            </form>
+        </div>
+        </div>
+        </div>
+
+
+
+
+
+
+        <!-- Script del mapa -->
+      <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+    <script>
+
+        var mymap = L.map('map').setView([-34.5966417, -58.374097], 16);
+        
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+            maxZoom: 18,
+            attribution: 'Precios Ya | Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox.streets'
+        }).addTo(mymap);
+
+        document.getElementById("telefono").onchange = function() {
+            if((document.getElementById("telefono").value).match(/[^0-9\s-]/g) != null ){
+                console.log((document.getElementById("telefono").value).match(/[^0-9\s-]/g))
+                document.getElementById("telefono").setCustomValidity("El telefono permite solo numeros");
+            }else{
+                document.getElementById("telefono").setCustomValidity("");  
+            }
+        }
+        document.getElementById("coord").onchange = function() {
+            let analizar = document.getElementById("coord").value;
+            if (analizar.split(",").length!=2){
+                document.getElementById("coord").setCustomValidity("Porfavor siga el ejemplo: 'X,Y'");
+            }
+            else{
+                let XY = analizar.split(",")
+                let X = parseFloat(XY[0])
+                let Y = parseFloat(XY[1])
+                if(typeof(X) != "number" || X>180 || X<-180  || typeof(Y) != "number" || Y>90 || Y<-90 ){
+                    document.getElementById("coord").setCustomValidity("Porfavor ingrese dos numeros entre X: -180 y 180 y Y: -90 y 90");
+                }
+                else{
+                    document.getElementById("coord").setCustomValidity("");
+                }
+            }
+
+        };
+
+        document.getElementById("formulario").onsubmit = function(){
+            
+            let nombre = document.getElementById("nombre").value
+            let direccion = document.getElementById("direccion").value
+            let telefono = document.getElementById("telefono").value
+            let categoria = document.getElementById("categoria").value
+            let coord = (document.getElementById("coord").value).split(",")
+
+            var circle = L.circle([parseFloat(coord[0]) , parseFloat(coord[1])], {
+                color: 'red',
+                fillColor: '#8400D3',
+                fillOpacity: 0.5,
+                radius: 10
+            }).addTo(mymap);
+            circle.bindPopup("<b>Descripción:</b>"+ nombre + "<br><b>Dirección:</b>"+ direccion + "<br><b>Telefónico:</b>"+ telefono + "<br><b>(X, Y):</b>"+ coord[0]+","+coord[1] + "<br><b>Categoria:</b>"+ categoria).openPopup();
+        }
+
+        function onMapClick(e) {
+            let coord = e.latlng.toString().substr(7)
+            coord = coord.substr(0,coord.length-1)
+            coord = coord.split(",")
+            document.getElementById("coord").value = coord[0] + "," + coord[1];
+        }
+
+        mymap.on('click', onMapClick);
+
+        document.getElementById("map").onmousedown = function(){
+            document.getElementById("map").style.cursor = "grabbing";
+        }
+
+        document.getElementById("map").onmouseup = function(){
+            document.getElementById("map").style.cursor = "pointer";
+        }
+
+
+    </script>
+
+<!-- #################################################################################################################################### -->
+<!-- ####################################################################### BOTONES ABAJO DEL MAPA ##################################################### -->
+<!-- #################################################################################################################################### -->
+
+
+<div class="container justify-content-center mt-1">
+    <div class="justify-content-center card-body">     
+    <div class="alert alert-success py-4" role="alert">
+    <h4>Ingrese una foto de su comercio</h4>
+    <form name="formulario" method="post" action="" enctype="multipart/form-data"> <!-- ¡No olvides el enctype! -->
+    <!-- Campo de selección de archivo -->
+    <input type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple>
+    </form>
+    </div>
+    <div class="form-group my-3">
+    <input type="submit" value="Agregar comercio" class="btn btn-success boton_submit"/>
+    </div>
+</div>
+</div>
+
+
+
+
+<!-- #################################################################################################################################### -->
+<!-- ####################################################################### PRODUCTOS ##################################################### -->
+<!-- #################################################################################################################################### -->
+
+
+
+<!-- 
+<h1 class="text-center py-3">Datos de mis productos</h1>
+
+<div class="container"> -->
+
+        <!-- Button trigger modal -->
+        
+        <!-- <div class="d-flex col=8 justify-content-end py-2">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            Ayuda
+          </button>
+        </div> -->
+          
+          <!-- Modal -->
+          <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">Ayuda</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Los productos ya se encuentran definidos por defecto y solo puede haber 2 tipos de productos iguales.
+                  Puede agregar la marca, el precio y una descripción por producto.
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+        
+        
+        
+        
+        <table class="table table-hover bt-5"> -->
+        
+        <!-- <caption>Al guardar cambios, acepta las políticas de uso y seguridad</caption> -->
+        
+        <!-- <tr>  
+            <th>Alimento</th> 
+            <th>Marca</th> 
+            <th>Precio</th>
+            <th>Descripción</th> 
+            <th>COLUMNA ADICIONAL</th> 
+            <th>Opciones</th>
+        </tr>
+        
+        <tr> 
+            <td>Arándano</td>
+            <td>49</td> 
+            <td>0.2</td>
+            <td>0.4</td> 
+            <td>1.0</td> 
+            <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span></td>
+        </tr>
+        
+        <tr> 
+            <td>Plátano</td> 
+            <td>90</td> 
+            <td>0.3</td>
+            <td>1.0</td> 
+            <td>1.0</td> 
+            <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span></td>
+        </tr>
+        
+        <tr> 
+            <td>Cereza</td> 
+            <td>46</td> 
+            <td>0.4</td>
+            <td>0.9</td>
+            <td>1.0</td>  
+            <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span></td>
+        </tr>
+        
+        <tr> 
+            <td>Fresa</td> 
+            <td>37</td> 
+            <td>0.5</td>
+            <td>0.8</td> 
+            <td>1.0</td> 
+            <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span></td>
+        </tr>
+        
+        </table>
+        
+        <div id="contenedorForm">
+        
+        </div>
+        </div> -->
+
+
+
+
+
+</body>
+</html>
+

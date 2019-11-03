@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css">
+
+    <!-- estilos en css -->
+    
+ 
+
+    <title>Precios Ya! - Registro</title>
+  </head>
+  <body>
+   
+    <article>
+      <section class="container">
+          <h1 class="h2 text-center my-3">Formulario de registro</h1>
+          <form action="" method="post" name="formulario" id="formulario" autocomplete="off">
+              <fieldset>
+                  <legend class="h4 text-center">
+                      Datos Personales
+                  </legend>
+                  <div class="form-group">
+                  <label>Nombre</label>
+                  <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Escribe tu nombre">
+                  </div>
+                  <div class="form-group">
+                  <label>Correo Electronico</label>
+                  <input type="email" id="email" name="email" class="form-control" placeholder="tucorreo@example.com">
+                  </div>
+                  <div class="form-group">
+                  <label>Contraseña</label>
+                  <input type="password" id="contra" name="contra" class="form-control">
+                  </div>
+
+                  
+
+                  <div onload="disableSubmit()">
+                  Acepto los 
+                  <a data-toggle="modal" data-target="#exampleModalScrollable" href=""> Terminos y Condiciones
+                  
+                      
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">Terminos y condiciones</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga neque ad incidunt repellat nam vitae temporibus in saepe, at labore reprehenderit molestiae placeat odio iure assumenda a eius deleniti omnis?
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga neque ad incidunt repellat nam vitae temporibus in saepe, at labore reprehenderit molestiae placeat odio iure assumenda a eius deleniti omnis?
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga neque ad incidunt repellat nam vitae temporibus in saepe, at labore reprehenderit molestiae placeat odio iure assumenda a eius deleniti omnis?
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga neque ad incidunt repellat nam vitae temporibus in saepe, at labore reprehenderit molestiae placeat odio iure assumenda a eius deleniti omnis?
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga neque ad incidunt repellat nam vitae temporibus in saepe, at labore reprehenderit molestiae placeat odio iure assumenda a eius deleniti omnis?
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga neque ad incidunt repellat nam vitae temporibus in saepe, at labore reprehenderit molestiae placeat odio iure assumenda a eius deleniti omnis?
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga neque ad incidunt repellat nam vitae temporibus in saepe, at labore reprehenderit molestiae placeat odio iure assumenda a eius deleniti omnis?
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga neque ad incidunt repellat nam vitae temporibus in saepe, at labore reprehenderit molestiae placeat odio iure assumenda a eius deleniti omnis?
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga neque ad incidunt repellat nam vitae temporibus in saepe, at labore reprehenderit molestiae placeat odio iure assumenda a eius deleniti omnis?
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga neque ad incidunt repellat nam vitae temporibus in saepe, at labore reprehenderit molestiae placeat odio iure assumenda a eius deleniti omnis?
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga neque ad incidunt repellat nam vitae temporibus in saepe, at labore reprehenderit molestiae placeat odio iure assumenda a eius deleniti omnis?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>                           
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </a>              
+                  <input type="checkbox" name="terms" id="terms" onchange="activateButton(this)"> 
+
+                  <br><br>
+                  </div>
+                  <div class="form-group text-center">
+                  <input type="submit" name="submit" id="submit" value="Registrarse" class="btn btn-primary ">
+                  </div>
+              </fieldset>
+          </form>
+      </section>
+  </article>
+
+    <script>
+      function disableSubmit() {
+      document.getElementById("submit").disabled = true;
+      }
+    
+      function activateButton(element) {
+    
+          if(element.checked) {
+            document.getElementById("submit").disabled = false;
+            }
+            else  {
+            document.getElementById("submit").disabled = true;
+          }
+    
+      }
+    </script>
+  
+  <!-- Script para bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+ </body>
+</html>
