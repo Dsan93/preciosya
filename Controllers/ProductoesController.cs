@@ -18,11 +18,19 @@ namespace preciosya.Controllers
             _context = context;
         }
 
-        // GET: Productoes
-        public async Task<IActionResult> Index()
+        // GET: Productoes 
+        public async Task<IActionResult> Index(string busqueda)
         {
-            var proyectosoftContext = _context.Producto.Include(p => p.ProMa);
-            return View(await proyectosoftContext.ToListAsync());
+            var productos = from m in _context.Producto
+                            select m;
+
+
+            if (!String.IsNullOrEmpty(busqueda))
+            {
+                productos = productos.Where(s => s.ProNombre.Contains(busqueda));
+            }
+
+            return View(await productos.ToListAsync());
         }
 
         // GET: Productoes/Details/5
